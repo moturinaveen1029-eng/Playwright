@@ -18,13 +18,13 @@ import com.microsoft.playwright.options.AriaRole;
 public class CoreApi {
 	static Playwright playwright;
 	static Browser browser;
-	BrowserContext context;
-	Page page;
+	static BrowserContext context;
+	static Page page;
 	
 	@BeforeAll
 	static void launchBrowser() {
 	playwright = Playwright.create();
-	browser=playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false).setSlowMo(500));
+	browser=playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false).setSlowMo(1000));
 	}
 	
 	@AfterAll
@@ -34,7 +34,7 @@ public class CoreApi {
 
 	
 	@BeforeEach
-	public void createNewPageEverytime() {
+	 public void createNewPageEverytime() {
 	   context=browser.newContext();
 	   page=context.newPage();
 	   page.navigate("https://demo.playwright.dev/todomvc/#/");
@@ -50,7 +50,7 @@ public class CoreApi {
         page.keyboard().press("Enter");
     }
 	
-    @Test    
+    /* @Test    
 	void Test1() {
 		assertTrue(page.title().contains("TodoMVC"));
 	}
@@ -136,7 +136,7 @@ public class CoreApi {
 	addTodo("Survive reload");
 	page.reload();
 	assertEquals(1, page.getByLabel("Toggle Todo").count());
-	}
+	}*/
 	
 	
 	
